@@ -1,0 +1,5 @@
+
+Collab Box is a simple collaborative textarea made in a few hours, as an excersize to learn better how to use node.js, express and socket.io. It turned out that the node and socket.io bits were probably the easiest parts of developing this. Correctly capturing different types of input in the text box (editing with the mouse is still unimplimented) and updating it for everyone else without sending the entire contents every time, then also ensuring that different people are able to type in different places at once, turned out to be relatively more tricky than setting up the express and socket.io servers themselves.
+
+Requires node.js (obviously), socket.io, express, and jqtpl (although to be honest, it'd be quite easy to get rid of that requirement).
+
