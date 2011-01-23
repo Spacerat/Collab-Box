@@ -35,7 +35,7 @@ boxserver.Server(app);
 //Web Pages
 ////
 
-//Index page: a list of games.
+//Index, containing the collab box.
 app.get('/', function(req, res) {
     head = res.partial('index_head');
     res.render('index', {locals: {
@@ -44,6 +44,7 @@ app.get('/', function(req, res) {
     }});
 });
 
+//About page, a nice little parahraph about the site.
 app.get('/about', function(req, res) {
     res.render('about',{locals: {title: site_title}});
 });
