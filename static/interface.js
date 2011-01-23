@@ -14,7 +14,7 @@ window.onload = function() {
             playerlist.innerHTML = "";
             for (var id in list) {
                 playerlist.innerHTML+=id+": ";
-                if (id !== this.sessionId) playerlist.innerHTML+=list[id].typing;
+                if (id !== this.sessionId) {playerlist.innerHTML+=list[id].typing;}
                 if (id == this.sessionId) {playerlist.innerHTML+=' <--- you';}
                 playerlist.innerHTML+= '<br />';
             }
