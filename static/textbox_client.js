@@ -22,11 +22,12 @@ var BoxClient = function(url, textarea_id) {
         socket.connect();
     }
     
-    
+    //Run the onconnect callback
     socket.on('connect', function() {
         if (that.onconnect) that.onconnect();
     });
     
+    //Run the ondisconnect callback
     socket.on('disconnect', function() {
         if (that.ondisconnect) that.ondisconnect();
     });
@@ -34,21 +35,32 @@ var BoxClient = function(url, textarea_id) {
     
     //Recieve data
     socket.on('message', function(data) {
+    
+        //The server sends the client's sessionId to the client on connection.
         if ('you' in data) {
             that.sessionId = data.you;
         }    
+        
+        //The entire contents of the text box.
         if ('full_update' in data) {
             textbox.value = data.full_update;
             prevtext = textbox.value;
         }
+        
+        //The full client list is sent to everyone on when anyone connects,
+        //additionally, the onclientsupdate() callback is run.
         if ('clients' in data) {
             clients = data.clients;
             if (that.onclientsupdate) that.onclientsupdate(clients);
         }
+        
+        //Removes disconnecting clients and runs onclientsupdate()
         if ('disconnect' in data) {
             delete clients[data.disconnect];
             if (that.onclientsupdate) that.onclientsupdate(clients);
         }
+        
+        //Recieve typing data. 
         if ('write' in data) {
             write = data.write;
             var poss = textbox.selectionStart;
@@ -70,7 +82,7 @@ var BoxClient = function(url, textarea_id) {
             }
             
             if (write.newphrase) {
-                clients[write.sessionId].typing = "";
+                clients[write.sessionId].typing = write.text;
             }
             else {
                 clients[write.sessionId].typing += write.text;
