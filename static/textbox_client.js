@@ -15,6 +15,7 @@ var BoxClient = function(url, textarea_id) {
     var socket= new io.Socket(url);
     var textbox = document.getElementById(textarea_id);
     var prevtext = "";
+    var clients = {};
     var that = this;
     
     this.start = function() {
@@ -41,7 +42,12 @@ var BoxClient = function(url, textarea_id) {
             prevtext = textbox.value;
         }
         if ('clients' in data) {
-            if (that.onclientsupdate) that.onclientsupdate(data.clients);
+            clients = data.clients;
+            if (that.onclientsupdate) that.onclientsupdate(clients);
+        }
+        if ('disconnect' in data) {
+            delete clients[data.disconnect];
+            if (that.onclientsupdate) that.onclientsupdate(clients);
         }
         if ('write' in data) {
             write = data.write;
@@ -62,6 +68,15 @@ var BoxClient = function(url, textarea_id) {
             if (write.start < pose) {
                 diffe = - write.del;
             }
+            
+            if (write.newphrase) {
+                clients[write.sessionId].typing = "";
+            }
+            else {
+                clients[write.sessionId].typing += write.text;
+            }
+
+            that.onclientsupdate(clients);
             
             textbox.selectionStart = poss + diffs;
             textbox.selectionEnd = pose + diffe;

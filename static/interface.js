@@ -12,9 +12,10 @@ window.onload = function() {
         }
         client.onclientsupdate = function(list) {
             playerlist.innerHTML = "";
-            for (var x in list) {
-                playerlist.innerHTML+=list[x];
-                if (list[x] == this.sessionId) {playerlist.innerHTML+=' <--- you';}
+            for (var id in list) {
+                playerlist.innerHTML+=id+": ";
+                playerlist.innerHTML+=list[id].typing;
+                if (id == this.sessionId) {playerlist.innerHTML+=' <--- you';}
                 playerlist.innerHTML+= '<br />';
             }
         }
