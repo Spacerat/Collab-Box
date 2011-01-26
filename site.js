@@ -1,6 +1,6 @@
 
-var express = require('express');
-var jqtpl = require('jqtpl');
+var express = require('./../express');
+var jqtpl = require('./../jqtpl');
 var util = require('util');
 var boxserver = require('./boxserver');
 
