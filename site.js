@@ -13,7 +13,7 @@ app.configure(function() {
     app.use(express.bodyDecoder());
     
     app.use(express.cookieDecoder());
-    app.use(express.session({key:"joe", secret:"lolwut"});
+    app.use(express.session({key:"joe", secret:"lolwut"}));
     
     app.set("view engine", "html");
     app.set("view options", {layout: true});
