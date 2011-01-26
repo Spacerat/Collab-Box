@@ -8,7 +8,7 @@ Collabbox socket server class. No public members. Starts when instantiated with 
 */
 this.Server = function(app) {
     var socket = io.listen(app);
-    var text = "Default text";
+    var text = "Type stuff!";
     
     socket.on('connection', function(client) {
         

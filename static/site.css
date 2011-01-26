@@ -1,38 +1,43 @@
 body {
     font-family: sans;
+    background-color: #EEEAFF;
+    margin-top: 0;
 }
 
 h1 {
     text-align: center;
     border-bottom: thin solid black;
+    margin-top: 0;
+    background-color: white;
 }
 
 div.main {
     width: 100%;
     margin: 0;
-    background-color: white;
 }
 
 div.nav {
     border-bottom: thin solid black;
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
+    text-align: center;
 }
 
 .navlink {
     margin-right: 1em;
 }
 
-div.content {
+.content {
     border: medium solid black;
     margin-bottom: 1em;
+    background-color: white;
 }
 
 #textarea {
     width: 100%;
     padding: 0;
     margin: 0;
-    border: white;
+    border: none;
 }
 
 .you {
