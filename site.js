@@ -1,6 +1,6 @@
 
 var express = require('express');
-var jqtpl = require('./../jqtpl');
+var templater = require('ejs');
 var util = require('util');
 var boxserver = require('./boxserver');
 
@@ -17,7 +17,7 @@ app.configure(function() {
     
     app.set("view engine", "html");
     app.set("view options", {layout: true});
-    app.register( ".html", jqtpl);
+    app.register( ".html", templater);
 });
 
 app.configure('development', function(){
@@ -37,11 +37,12 @@ boxserver.Server(app);
 
 //Index, containing the collab box.
 app.get('/', function(req, res) {
-    head = res.partial('index_head');
-    res.render('index', {locals: {
-        title: site_title,
-        head: head
-    }});
+    var head = res.partial('index_head', {});
+    
+    res.render('index', {
+        'title': site_title,
+        'head': head
+    });
 });
 
 //About page, a nice little parahraph about the site.
