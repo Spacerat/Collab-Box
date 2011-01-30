@@ -17,7 +17,6 @@
                 console.log("notif permission " + allowed);
                 if (allowed == 0) {
                     client.onnewclient = function(newclient) {
-                        alert("New fucking client");
                         notif.createNotification('http://spacerat.meteornet.net/gallery/pony.png','Collabbox',"A new user has connected!").show();
                     }
                 }
