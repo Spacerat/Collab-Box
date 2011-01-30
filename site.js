@@ -47,7 +47,7 @@ app.get('/', function(req, res) {
 
 //About page, a nice little parahraph about the site.
 app.get('/about', function(req, res) {
-    res.render('about',{locals: {title: site_title}});
+    res.render('about',{title: site_title});
 });
 
 
