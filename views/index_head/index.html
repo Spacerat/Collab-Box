@@ -11,6 +11,7 @@
             client.onnewclient = function(newclient) {
                 notif.createNotification('http://spacerat.meteornet.net/gallery/pony.png','Collabbox',"A new user has connected!").show();
             }
+            document.getElementById("req_notifications").style.display = "none";
         }
     }
     StartCollabbox(function(cl) {
@@ -27,7 +28,7 @@
         }
     }
     else {
-        document.getElementById("req_notifications").style.display = "hidden";
+        document.getElementById("req_notifications").style.display = "none";
     }
 
 </script>
