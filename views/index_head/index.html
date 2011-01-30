@@ -15,7 +15,6 @@
             notif.requestPermission(function() {
                 allowed = notif.checkPermission();
                 console.log("notif permission " + allowed);
-                alert(client);
                 if (allowed == 0) {
                     client.onnewclient = function(newclient) {
                         alert("New fucking client");
