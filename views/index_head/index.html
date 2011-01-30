@@ -5,10 +5,6 @@
 <script type="text/javascript">
     var notif = window.webkitNotifications;
     var client;
-    StartCollabbox(function(cl) {
-        client = cl
-    });
-    
     var allowed = notif.checkPermission();
     var setup = function () {
         if (allowed == 0) {
@@ -17,7 +13,11 @@
             }
         }
     }
-    setup();
+    StartCollabbox(function(cl) {
+        client = cl;
+        setup();
+    });
+    
     if (notif) {
         reqnot = function() {
             notif.requestPermission(function() {
