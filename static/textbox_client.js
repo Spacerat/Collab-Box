@@ -54,6 +54,13 @@ var BoxClient = function(url, textarea_id) {
             if (that.onclientsupdate) that.onclientsupdate(clients);
         }
         
+        if ('newclient' in data) {
+            clients[data.newclient.sessionId] = data.newclient;
+            if (that.onclientsupdate) that.onclientsupdate(clients);
+            if (that.onnewclient) that.onnewclient(data.newclient);
+        }
+        
+        
         //Removes disconnecting clients and runs onclientsupdate()
         if ('disconnect' in data) {
             delete clients[data.disconnect];

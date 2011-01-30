@@ -2,4 +2,28 @@
 <script src="/socket.io/socket.io.js"></script> 
 <script src="textbox_client.js"></script>
 <script src="interface.js"></script>
+<script type="text/javascript">
+    var notif = window.webkitNotifications;
+    var client;
+    StartCollabbox(function(cl) {
+        client = cl
+    });
+    
+    if (notif) {
+        reqnot = function() {
+            var allowed = notif.checkPermission();
+            console.log("notif permission " + allowed);
+            if (allowed == 0) {
+                client.onnewclient = function(newclient) {
+                    window.webkitNotifications.createNotification('','Collabbox',"A new user has connected!");
+                }
+            }
+        }
+    }
+    else {
+        document.getElementById("req_notifications").style.display = "hidden";
+    }
+
+</script>
+
 
