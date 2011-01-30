@@ -11,13 +11,18 @@
     
     if (notif) {
         reqnot = function() {
-            var allowed = notif.checkPermission();
-            console.log("notif permission " + allowed);
-            if (allowed == 0) {
-                client.onnewclient = function(newclient) {
-                    window.webkitNotifications.createNotification('','Collabbox',"A new user has connected!");
+            var allowed;
+            notif.requestPermission(function() {
+                allowed = notif.checkPermission();
+                console.log("notif permission " + allowed);
+                alert(client);
+                if (allowed == 0) {
+                    client.onnewclient = function(newclient) {
+                        alert("New fucking client");
+                        notif.createNotification('http://spacerat.meteornet.net/gallery/pony.png','Collabbox',"A new user has connected!").show();
+                    }
                 }
-            }
+            });
         }
     }
     else {
