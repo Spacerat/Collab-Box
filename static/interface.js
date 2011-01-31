@@ -6,7 +6,7 @@ EditableLine = function(parent, id, value, onchange) {
     span = document.createElement("span");
     span.id = id;
     span.className = 'renamable';
-    span.innerHTML = value;
+    span.innerText = value;
     parent.appendChild(span);
     
 
