@@ -51,13 +51,7 @@ this.Server = function(app) {
         
         client.on('message',function(data, sender) {
             if ('rename' in data) {
-                var n = data.rename;
-                //n = n.replace("&", "&amp;");
-                n = n.replace("<", "&lt;");
-                n = n.replace(">", "&gt;");
-                
-                
-                client.name = n;
+                client.name = data.rename;
                 socket.broadcast({clients: clientlist()});
             }
             if ('write' in data) {

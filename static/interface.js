@@ -24,7 +24,7 @@ EditableLine = function(parent, id, value, onchange) {
             catch(e) {
                 //Despite the ERR_NOT_FOUND always emitted here, it seems to work fine...
             }
-            if (onchange) {onchange(span.innerText);}
+            if (onchange) {onchange(input.value);}
         }
         input.onblur = set;
         input.onchange = set;
