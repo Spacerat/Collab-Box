@@ -13,18 +13,18 @@ EditableLine = function(parent, id, value, onchange) {
     span.onclick = function() {
         //alert("!");
         var input = document.createElement("input");
-        input.value = span.innerHTML;
+        input.value = span.innerText;
         parent.replaceChild(input, span);
         input.focus();
         var set = function() {
-            span.innerHTML = input.value;
+            span.innerText = input.value;
             try {
                 parent.replaceChild(span, input);
             }
             catch(e) {
                 //Despite the ERR_NOT_FOUND always emitted here, it seems to work fine...
             }
-            if (onchange) {onchange(span.innerHTML);}
+            if (onchange) {onchange(span.innerText);}
         }
         input.onblur = set;
         input.onchange = set;
@@ -54,10 +54,10 @@ function StartCollabbox(callback) {
                     if (id !== this.sessionId) {
                         span = playerlist.appendChild(document.createElement("span"));
                         span.id = id;
-                        span.innerHTML = list[id].name;
+                        span.innerText = list[id].name;
                         span = playerlist.appendChild(document.createElement("span"));
                         span.id = id+"_typing";
-                        span.innerHTML = ": "+list[id].typing;
+                        span.innerText = ": "+list[id].typing;
                     }
                     else if (id == this.sessionId) {
                         new EditableLine(playerlist, id, list[id].name, function(name) {
@@ -70,7 +70,7 @@ function StartCollabbox(callback) {
                 }
             }
             client.ontyping = function(text, id) {
-                document.getElementById(id+"_typing").innerHTML=": "+text;
+                document.getElementById(id+"_typing").innerText=": "+text;
             }
             client.start();
             if (callback) callback(client);

@@ -3,6 +3,8 @@
 var io = require('./../socket.io');
 var util = require('util');
 
+
+
 /*
 Collabbox socket server class. No public members. Starts when instantiated with Server(app/server)
 */
@@ -49,8 +51,14 @@ this.Server = function(app) {
         
         client.on('message',function(data, sender) {
             if ('rename' in data) {
-                client.name = data.rename;
-                socket.broadcast({clients: clientlist()}, client.sessionId);
+                var n = data.rename;
+                //n = n.replace("&", "&amp;");
+                n = n.replace("<", "&lt;");
+                n = n.replace(">", "&gt;");
+                
+                
+                client.name = n;
+                socket.broadcast({clients: clientlist()});
             }
             if ('write' in data) {
                 
