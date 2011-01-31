@@ -28,7 +28,7 @@ div.nav {
 }
 
 .content {
-    border: medium solid black;
+    border: thin solid black;
     margin-bottom: 1em;
     background-color: white;
 }
