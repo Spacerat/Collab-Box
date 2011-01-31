@@ -40,7 +40,7 @@ div.nav {
     border: none;
 }
 
-.you {
-    color: red;
+#req_notifications {
+    font-size: small;
 }
 

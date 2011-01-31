@@ -40,7 +40,7 @@ this.Server = function(app) {
         });
         
         //Let other clients know of the new connection.
-        socket.broadcast({clients: clientlist()}, client.sessionId);
+        socket.broadcast({newclient: clientobj(client)}, client.sessionId);
         
         //typingResetTimeout is a timer ID, reset every time the client types.
         var typingResetTimeout = null;

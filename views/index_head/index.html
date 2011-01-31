@@ -2,4 +2,35 @@
 <script src="/socket.io/socket.io.js"></script> 
 <script src="textbox_client.js"></script>
 <script src="interface.js"></script>
+<script type="text/javascript">
+    var notif = window.webkitNotifications;
+    var client;
+    var allowed = notif.checkPermission();
+    var setup = function () {
+        if (allowed == 0) {
+            client.onnewclient = function(newclient) {
+                notif.createNotification('http://spacerat.meteornet.net/gallery/pony.png','Collabbox',"A new user has connected!").show();
+            }
+            document.getElementById("req_notifications").style.display = "none";
+        }
+    }
+    StartCollabbox(function(cl) {
+        client = cl;
+        setup();
+    });
+    
+    if (notif) {
+        reqnot = function() {
+            notif.requestPermission(function() {
+                allowed = notif.checkPermission();
+                setup();
+            });
+        }
+    }
+    else {
+        document.getElementById("req_notifications").style.display = "none";
+    }
+
+</script>
+
 
