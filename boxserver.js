@@ -14,12 +14,14 @@ this.Server = function(app) {
         
         //client.typing stores whatever the client is currently typing, reset about 3 seconds after they stop typing.
         client.typing="";
+        client.name="Anonymous";
         
         //clientobj(client) returns a simpler object representing the client, for sending to clients.
         var clientobj = function(cl) {
             return {
                 sessionId: cl.sessionId,
-                typing: cl.typing
+                typing: cl.typing,
+                name: cl.name
             }
         }
         
@@ -46,6 +48,10 @@ this.Server = function(app) {
         var typingResetTimeout = null;
         
         client.on('message',function(data, sender) {
+            if ('rename' in data) {
+                client.name = data.rename;
+                socket.broadcast({clients: clientlist()}, client.sessionId);
+            }
             if ('write' in data) {
                 
                 //Figure out how to update the text based on the input.

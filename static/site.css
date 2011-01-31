@@ -32,6 +32,9 @@ div.nav {
     margin-bottom: 1em;
     background-color: white;
 }
+.textcontent {
+    padding-left: 1em;
+}
 
 #textarea {
     width: 100%;
@@ -44,3 +47,6 @@ div.nav {
     font-size: small;
 }
 
+.renamable {
+    text-decoration: underline;
+}

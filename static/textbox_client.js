@@ -22,6 +22,10 @@ var BoxClient = function(url, textarea_id) {
         socket.connect();
     }
     
+    this.rename = function(name) {
+        socket.send({'rename': name});
+    }
+    
     //Run the onconnect callback
     socket.on('connect', function() {
         if (that.onconnect) that.onconnect();
@@ -95,7 +99,7 @@ var BoxClient = function(url, textarea_id) {
                 clients[write.sessionId].typing += write.text;
             }
 
-            that.onclientsupdate(clients);
+            if (that.ontyping) that.ontyping(clients[write.sessionId].typing, write.sessionId);
             
             textbox.selectionStart = poss + diffs;
             textbox.selectionEnd = pose + diffe;
