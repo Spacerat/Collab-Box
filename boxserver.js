@@ -68,7 +68,8 @@ this.Server = function(app) {
                     text: write.text,
                     start: write.start,
                     del: write.del,
-                    sessionId: client.sessionId
+                    sessionId: client.sessionId,
+                    id: write.id
                 }
                 
                 if (prevtext !== text) { //No need to send anything if nothing has changed.

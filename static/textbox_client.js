@@ -17,6 +17,9 @@ var BoxClient = function(url, textarea_id) {
     var prevtext = "";
     var clients = {};
     var that = this;
+    var recieve_queue = Array();
+    var last_message = null;
+    var send_queue = Array();
     
     this.start = function() {
         socket.connect();
@@ -107,6 +110,26 @@ var BoxClient = function(url, textarea_id) {
         }
     });
 
+    /* sendQueued(message)
+        Add message to the outbound queue. If message is null, send the next queued message.
+    */
+    this.sendQueuedWrite = function(obj) {
+        if (obj) {
+            obj.queue_id = queue_id;
+            queue_id += 1;
+            if (last_message == null) {
+                last_message = obj;
+                socket.send(obj);
+            }
+            else {
+                this.send_queue.push(obj);
+            }
+        }
+        else {
+            obj = this.send_queue.shift();
+            socket.send(obj);
+        }
+    }
     
     //Send typing data    
     textbox.onkeyup = function(argument) {
@@ -129,11 +152,12 @@ var BoxClient = function(url, textarea_id) {
         }
         
         var str = s.slice(startchange, pos);
-        var deletelength = prevtext.length - textbox.value.length;
-        
+        var deletelength = prevtext.length - textbox.value.length; 
+        var del_text = prevetext.slice(startchange, deletelength);
         
         socket.send({'write': {
-            del: deletelength,
+            deltext: del_text,
+            del: deletelength, //redundant
             start: startchange,
             text: str
         }});
