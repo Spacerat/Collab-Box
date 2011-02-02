@@ -3,9 +3,9 @@
 <script src="textbox_client.js"></script>
 <script src="interface.js"></script>
 <script type="text/javascript">
-    var notif = window.webkitNotifications;
+    var notif, allowed;
+    if (notif = window.webkitNotifications) {allowed = notif.checkPermission();}
     var client;
-    var allowed = notif.checkPermission();
     var setup = function () {
         if (allowed == 0) {
             client.onnewclient = function(newclient) {
